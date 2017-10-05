@@ -1,0 +1,39 @@
+<html>
+        <head lang="en">
+            <meta charset="UTF-8">
+            <link rel="stylesheet" type="text/css" href="/css/style.css">
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+            <script type ="text/javascript" src="/socket.io/socket.io.js"></script>
+            <script type ="text/javascript">
+                 $(document). ready(function (){
+                    // this triggers the connection event in our server!
+                    var socket  = io.connect();
+                    
+                    // we'll write all the socket stuff after the above line!
+                    $( '#count').click(function (){
+                        socket.emit( "count_clicked", {client:  count});
+                    });
+                    $( '#reset').click(function (){
+                        socket.emit( "reset_clicked", {client:  count});
+                    });
+                    socket.on( 'display_count', function (data){
+                        document.getElementById("display").innerHTML = 
+                        `<h1>The button has been pucshed ${data.count} time(s)</h1>`; 
+                    });
+                })
+
+                
+                
+            </script>
+            <title>The Great Botton Game</title>
+        </head>
+
+        <body>
+            <div id="display"> </div>
+            <div><h4>Push the button to update the count!</h4></div>
+            <div><button id= "count">Push the epic button</button></div>
+            <div><button id= "reset">Reset count</button></div>
+            
+        </body>
+    
+    </html>
