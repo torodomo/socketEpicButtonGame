@@ -39,10 +39,12 @@ io.sockets.on('connection', function (socket) {
     socket.on( "count_clicked", function (data){
         count ++;
         socket.emit( 'display_count', {count: count});
+        socket.broadcast.emit( 'display_count', {count: count});
     })
     socket.on( "reset_clicked", function (data){
         count = 0;
         socket.emit( 'display_count', {count: count});
+        socket.broadcast.emit( 'display_count', {count: count})
     })
     socket.emit( 'display_count', {count: count});
 })
