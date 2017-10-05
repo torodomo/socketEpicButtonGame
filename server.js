@@ -20,9 +20,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.get('/', function (req, res){
     if(!req.session.count){
         req.session.count = 0;
-        console.log("count click")
     }
-    console.log("Landing Page")
     res.render('index.ejs', {count: req.session.count});
 });
 
